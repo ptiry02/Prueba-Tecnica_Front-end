@@ -9,7 +9,7 @@ const Results = ({ data }) => {
 
   return (
     <>
-      {data.total_count && data.total_count !== 0 ? (
+      {(data.total_count ? data.total_count : 0) !== 0 && (
         <Wrapper flexDir="column" bgColor={theme.colors.medium}>
           <List>
             {slicedList.map((item) => (
@@ -21,13 +21,6 @@ const Results = ({ data }) => {
               </Element>
             ))}
           </List>
-        </Wrapper>
-      ) : (
-        <></>
-      )}
-      {data.error && (
-        <Wrapper>
-          <ErrorMessage>{data.error.message}</ErrorMessage>
         </Wrapper>
       )}
     </>

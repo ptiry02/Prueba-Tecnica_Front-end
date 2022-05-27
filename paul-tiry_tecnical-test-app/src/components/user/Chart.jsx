@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styled, { useTheme } from 'styled-components'
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory'
 import useFetch from '../../hooks/useFetch'
@@ -6,27 +5,21 @@ import useFetch from '../../hooks/useFetch'
 const Chart = ({ userName }) => {
   const theme = useTheme()
   const { userData, fetchUser } = useFetch()
+  fetchUser(userName)
+
   const info = [
     {
       x: 'Following',
-      y:
-        userData.following !== 0
-          ? userData.following
-          : toString(userData.following),
+      y: userData.following ? userData.following : 0,
       label: userData.following,
     },
     {
       x: 'Followers',
-      y:
-        userData.followers !== 0
-          ? userData.followers
-          : toString(userData.followers),
+      y: userData.followers ? userData.followers : 0,
       label: userData.followers,
     },
   ]
-  useEffect(() => {
-    fetchUser(userName)
-  }, [userName, fetchUser])
+
   return (
     <ChartWrapper bgColor={theme.colors.light}>
       <VictoryChart
@@ -36,7 +29,7 @@ const Chart = ({ userName }) => {
         <VictoryAxis domain={[1, 2]} style={{ tickLabels: { fontSize: 22 } }} />
         <VictoryAxis
           dependentAxis={
-            userData.followers === 0 && userData.following === 0 ? false : true
+            (userData.followers && userData.following) === 0 ? false : true
           }
           style={{ tickLabels: { fontSize: 22 } }}
         />
