@@ -46,7 +46,7 @@ const Element = styled.li`
   padding: 0.5rem 0.5rem;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.dark};
-  color: ${({ theme }) => theme.colors.lightgray};
+  color: ${({ theme }) => theme.colors.lightGray};
   :hover {
     text-decoration: underline;
     cursor: pointer;

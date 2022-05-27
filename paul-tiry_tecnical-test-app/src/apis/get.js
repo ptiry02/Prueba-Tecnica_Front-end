@@ -8,7 +8,7 @@ export const getUsers = async (value) => {
     return {
       error: true,
       id: 404,
-      message: `No results found for ${value}`,
+      message: `No results found for: ${value}`,
     }
   }
   return { ...result, error: false }

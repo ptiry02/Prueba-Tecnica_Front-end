@@ -58,7 +58,7 @@ const Info = styled.div`
   align-self: flex-start;
   ul {
     list-style: none;
-    color: ${({ theme }) => theme.colors.lightgray};
+    color: ${({ theme }) => theme.colors.lightGray};
   }
 `
 const ListElement = styled.div`

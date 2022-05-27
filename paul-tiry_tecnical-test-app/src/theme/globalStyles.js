@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     body{
         display: flex;
         justify-content: center;
-        background: ${({ theme }) => theme.colors.lightgray};
+        background: ${({ theme }) => theme.colors.lightGray};
         font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 `
