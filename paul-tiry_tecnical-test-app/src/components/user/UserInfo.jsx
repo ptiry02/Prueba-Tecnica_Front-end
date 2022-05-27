@@ -1,16 +1,9 @@
-import { useEffect } from 'react'
-import { useParams } from 'react-router'
 import styled from 'styled-components'
 import { FaGithubSquare } from 'react-icons/fa'
 import { BsPersonBadge, BsPersonPlusFill } from 'react-icons/bs'
-import useFetch from '../hooks/useFetch'
-import Wrapper from './Wrapper'
+import Wrapper from '../Wrapper'
 
-const User = () => {
-  const user = useParams()
-  const { userData, fetchUser } = useFetch()
-  fetchUser(user.login)
-
+const UserInfo = ({ userData }) => {
   return (
     <Wrapper flexDir="row">
       <Img
@@ -39,7 +32,7 @@ const User = () => {
   )
 }
 
-export default User
+export default UserInfo
 
 const Title = styled.h1`
   margin-bottom: 2rem;

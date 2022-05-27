@@ -1,11 +1,11 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './theme/themeColors'
 import useFetch from './hooks/useFetch'
 import GlobalStyle from './theme/globalStyles'
 import Search from './components/Search'
-import User from './components/User'
+import User from './components/user/User'
 
 function App() {
   const input = useRef()
