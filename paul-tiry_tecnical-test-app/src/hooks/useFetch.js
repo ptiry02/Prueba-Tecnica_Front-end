@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { getUsers, getInfo } from '../apis/get'
 
 const useFetch = () => {
@@ -10,10 +10,10 @@ const useFetch = () => {
     setSearchData(item)
   }
 
-  const fetchUser = async (value) => {
+  const fetchUser = useCallback(async (value) => {
     const item = await getInfo(value)
     setUserData(item)
-  }
+  }, [])
 
   return {
     searchData,
