@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './theme/themeColors'
@@ -9,7 +9,8 @@ import User from './components/User'
 
 function App() {
   const input = useRef()
-  const { error, usersList, search } = useFetch()
+  const { searchData, search } = useFetch()
+  console.log('change in data?: ', searchData)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -17,7 +18,6 @@ function App() {
     input.current.value = ''
   }
 
-  useEffect(() => {}, [error, usersList])
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -25,12 +25,7 @@ function App() {
         <Route
           path="/"
           element={
-            <Search
-              ref={input}
-              onClick={handleSubmit}
-              data={usersList}
-              error={error}
-            />
+            <Search ref={input} onClick={handleSubmit} data={searchData} />
           }
         ></Route>
         <Route path="/user/:login" element={<User />} />

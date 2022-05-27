@@ -1,28 +1,31 @@
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 import Wrapper from './Wrapper'
 
-const Results = ({ data, error }) => {
+const Results = ({ data }) => {
   const theme = useTheme()
+
   return (
     <>
-      {data && (
+      {data.total_count && data.total_count !== 0 ? (
         <Wrapper flexDir="column" bgColor={theme.colors.medium}>
           <List>
-            {data &&
-              data.map((item) => (
-                <CustomLink key={item.id} to={`user/${item.login}`}>
-                  <Element>
-                    {item.login}, ID: {item.id}
-                  </Element>
-                </CustomLink>
-              ))}
+            {data.items?.slice(0, 10).map((item) => (
+              <CustomLink key={item.id} to={`user/${item.login}`}>
+                <Element>
+                  {item.login}, ID: {item.id}
+                </Element>
+              </CustomLink>
+            ))}
           </List>
         </Wrapper>
+      ) : (
+        <></>
       )}
-      {error && (error.id === 404 || error.id === 422) && (
+      {data.error && (
         <Wrapper>
-          <ErrorMessage>{error.message}</ErrorMessage>
+          <ErrorMessage>{data.error.message}</ErrorMessage>
         </Wrapper>
       )}
     </>
@@ -32,7 +35,6 @@ const Results = ({ data, error }) => {
 export default Results
 
 const List = styled.ol`
-  margin: 3rem 0;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
@@ -55,6 +57,5 @@ const Element = styled.li`
 `
 const ErrorMessage = styled.h2`
   margin: auto;
-  padding: 1.5rem 0;
   color: ${({ theme }) => theme.colors.orange};
 `
