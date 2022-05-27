@@ -2,19 +2,12 @@ import { useState } from 'react'
 import { getUsers, getInfo } from '../apis/get'
 
 const useFetch = () => {
-  const [error, setError] = useState({})
-  const [usersList, setUsersList] = useState()
+  const [searchData, setSearchData] = useState({})
   const [userData, setUserData] = useState({})
 
   const search = async (value) => {
     const item = await getUsers(value)
-    if (item.error === true) {
-      setUsersList()
-      setError(item)
-    } else {
-      setError({})
-      setUsersList(item.items.slice(0, 10))
-    }
+    setSearchData(item)
   }
 
   const fetchUser = async (value) => {
@@ -23,8 +16,7 @@ const useFetch = () => {
   }
 
   return {
-    error,
-    usersList,
+    searchData,
     userData,
     search,
     fetchUser,
