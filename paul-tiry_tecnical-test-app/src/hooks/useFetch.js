@@ -1,29 +1,33 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState } from 'react'
+import { getUsers, getInfo } from '../apis/get'
 
 const useFetch = () => {
-  const [searchValue, setSearchValue] = useState([])
-  const [userInfo, setUserInfo] = useState({})
+  const [error, setError] = useState({})
+  const [usersList, setUsersList] = useState()
+  const [userData, setUserData] = useState({})
 
-  const getUsers = async (value) => {
-    const response = await fetch(
-      `https://api.github.com/search/users?q=${value}`
-    )
-    const jsonResponse = await response.json()
-    const usersList = jsonResponse.items
-    setSearchValue(usersList.slice(0, 10))
+  const search = async (value) => {
+    const item = await getUsers(value)
+    if (item.error === true) {
+      setUsersList()
+      setError(item)
+    } else {
+      setError({})
+      setUsersList(item.items.slice(0, 10))
+    }
   }
 
-  const getInfo = async (login) => {
-    const response = await fetch(`https://api.github.com/users/${login}`)
-    const jsonResponse = await response.json()
-    setUserInfo(jsonResponse)
+  const fetchUser = async (value) => {
+    const item = await getInfo(value)
+    setUserData(item)
   }
 
   return {
-    searchValue,
-    userInfo,
-    getUsers,
-    getInfo,
+    error,
+    usersList,
+    userData,
+    search,
+    fetchUser,
   }
 }
 export default useFetch

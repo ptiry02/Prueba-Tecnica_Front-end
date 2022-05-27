@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router'
 import styled from 'styled-components'
 import { FaGithubSquare } from 'react-icons/fa'
@@ -7,30 +8,30 @@ import Wrapper from './Wrapper'
 
 const User = () => {
   const user = useParams()
-  const { userInfo, getInfo } = useFetch()
-  getInfo(user.login)
+  const { userData, fetchUser } = useFetch()
+  fetchUser(user.login)
 
   return (
     <Wrapper flexDir="row">
       <Img
-        src={userInfo.avatar_url}
-        alt={userInfo.login}
-        title={userInfo.login}
+        src={userData.avatar_url}
+        alt={userData.login}
+        title={userData.login}
       />
       <Info>
-        <Title>{userInfo.login}</Title>
+        <Title>{userData.login}</Title>
         <ul>
           <ListElement>
             <FaGithubSquare size={'2rem'} />
-            <li>Number of public repos: {userInfo.public_repos}</li>
+            <li>Number of public repos: {userData.public_repos}</li>
           </ListElement>
           <ListElement>
             <BsPersonBadge size={'2rem'} />
-            <li>Following: {userInfo.following} users.</li>
+            <li>Following: {userData.following} users.</li>
           </ListElement>
           <ListElement>
             <BsPersonPlusFill size={'2rem'} />
-            <li>Number of followers: {userInfo.followers}</li>
+            <li>Number of followers: {userData.followers}</li>
           </ListElement>
         </ul>
       </Info>

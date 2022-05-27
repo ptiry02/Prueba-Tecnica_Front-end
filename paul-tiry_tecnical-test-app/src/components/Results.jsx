@@ -1,22 +1,31 @@
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { theme } from '../helpers/constants'
+import styled, { useTheme } from 'styled-components'
 import Wrapper from './Wrapper'
 
-const Results = ({ data }) => {
+const Results = ({ data, error }) => {
+  const theme = useTheme()
   return (
-    <Wrapper flexDir="column" bgColor={theme.colors.medium}>
-      <List>
-        {data &&
-          data.map((item) => (
-            <CustomLink key={item.id} to={`user/${item.login}`}>
-              <Element>
-                {item.login}, ID: {item.id}
-              </Element>
-            </CustomLink>
-          ))}
-      </List>
-    </Wrapper>
+    <>
+      {data && (
+        <Wrapper flexDir="column" bgColor={theme.colors.medium}>
+          <List>
+            {data &&
+              data.map((item) => (
+                <CustomLink key={item.id} to={`user/${item.login}`}>
+                  <Element>
+                    {item.login}, ID: {item.id}
+                  </Element>
+                </CustomLink>
+              ))}
+          </List>
+        </Wrapper>
+      )}
+      {error && (error.id === 404 || error.id === 422) && (
+        <Wrapper>
+          <ErrorMessage>{error.message}</ErrorMessage>
+        </Wrapper>
+      )}
+    </>
   )
 }
 
@@ -32,15 +41,20 @@ const CustomLink = styled(Link)`
   text-decoration: none;
 `
 const Element = styled.li`
-  border: 2px solid ${theme.colors.orange};
+  border: 2px solid ${({ theme }) => theme.colors.orange};
   text-align: center;
   padding: 0.5rem 0.5rem;
   border-radius: 10px;
-  background-color: ${theme.colors.dark};
-  color: ${theme.colors.lightgray};
+  background-color: ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.colors.lightgray};
   :hover {
     text-decoration: underline;
     cursor: pointer;
-    color: ${theme.colors.orange};
+    color: ${({ theme }) => theme.colors.orange};
   }
+`
+const ErrorMessage = styled.h2`
+  margin: auto;
+  padding: 1.5rem 0;
+  color: ${({ theme }) => theme.colors.orange};
 `
