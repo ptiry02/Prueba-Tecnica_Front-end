@@ -4,7 +4,7 @@ import Button from './Button'
 import Results from './Results'
 import Wrapper from './Wrapper'
 
-const Search = forwardRef(({ data, onClick }, ref) => {
+const Search = forwardRef(({ data, onClick, searchValue }, ref) => {
   const theme = useTheme()
   return (
     <>
@@ -17,10 +17,10 @@ const Search = forwardRef(({ data, onClick }, ref) => {
         {data.total_count && data.total_count !== 0 ? (
           <ResultMessage>
             {data.items?.length === 1
-              ? `Found ${data.items.length} result.`
+              ? `Found "${searchValue}".`
               : data.items.length <= 10
-              ? `Found ${data.items.length} results.`
-              : `Found ${data.total_count} results. Here are the first 10`}
+              ? `Found ${data.items.length} results for "${searchValue}".`
+              : `Found ${data.total_count} results for "${searchValue}". Here are the first 10`}
           </ResultMessage>
         ) : (
           <></>

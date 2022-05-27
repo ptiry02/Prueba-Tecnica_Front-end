@@ -13,7 +13,6 @@ export default Wrapper
 
 const Div = styled.div`
   display: flex;
-  padding: 3rem;
   flex-direction: ${({ flexDir }) => flexDir};
   align-items: center;
   margin: 4rem 0;
@@ -21,4 +20,5 @@ const Div = styled.div`
   background-color: ${({ bgColor }) => bgColor};
   border-radius: 1rem;
   box-shadow: 0px 4px 25px gray;
+  padding: 3rem 2rem;
 `

@@ -1,22 +1,24 @@
-import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
+import Chart from './user/Chart'
 import Wrapper from './Wrapper'
 
 const Results = ({ data }) => {
   const theme = useTheme()
+  const slicedList = data.items?.slice(0, 10)
 
   return (
     <>
       {data.total_count && data.total_count !== 0 ? (
         <Wrapper flexDir="column" bgColor={theme.colors.medium}>
           <List>
-            {data.items?.slice(0, 10).map((item) => (
-              <CustomLink key={item.id} to={`user/${item.login}`}>
-                <Element>
-                  {item.login}, ID: {item.id}
-                </Element>
-              </CustomLink>
+            {slicedList.map((item) => (
+              <Element key={item.id}>
+                <CustomLink to={`user/${item.login}`}>
+                  Username: {item.login} / ID: {item.id}
+                </CustomLink>
+                <Chart userName={item.login} />
+              </Element>
             ))}
           </List>
         </Wrapper>
@@ -41,6 +43,12 @@ const List = styled.ol`
 `
 const CustomLink = styled(Link)`
   text-decoration: none;
+  color: ${({ theme }) => theme.colors.lightGray};
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.orange};
+  }
 `
 const Element = styled.li`
   border: 2px solid ${({ theme }) => theme.colors.orange};
@@ -49,11 +57,6 @@ const Element = styled.li`
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.dark};
   color: ${({ theme }) => theme.colors.lightGray};
-  :hover {
-    text-decoration: underline;
-    cursor: pointer;
-    color: ${({ theme }) => theme.colors.orange};
-  }
 `
 const ErrorMessage = styled.h2`
   margin: auto;
