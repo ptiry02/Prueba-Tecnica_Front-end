@@ -1,11 +1,13 @@
 import { forwardRef } from 'react'
-import styled from 'styled-components'
-import { theme } from '../helpers/constants'
+import styled, { useTheme } from 'styled-components'
 import Button from './Button'
 import Results from './Results'
 import Wrapper from './Wrapper'
 
-const Search = forwardRef(({ data, onClick }, ref) => {
+const Search = forwardRef(({ data, onClick, error }, ref) => {
+  console.log('search Error: ', error)
+  console.log('search Data: ', data)
+  const theme = useTheme()
   return (
     <>
       <Wrapper flexDir="column" bgColor={theme.colors.dark}>
@@ -15,7 +17,7 @@ const Search = forwardRef(({ data, onClick }, ref) => {
           <Button onClick={onClick} text="search" />
         </Form>
       </Wrapper>
-      {data && data.length >> 0 ? <Results data={data} /> : <></>}
+      <Results data={data} error={error} />
     </>
   )
 })
@@ -25,7 +27,7 @@ export default Search
 const Title = styled.h1`
   margin-top: 3rem;
   text-transform: uppercase;
-  color: ${theme.colors.orange};
+  color: ${({ theme }) => theme.colors.orange};
 `
 const Input = styled.input`
   min-width: 75%;

@@ -1,13 +1,9 @@
-import styled from 'styled-components'
-import { theme } from '../helpers/constants'
+import styled, { useTheme } from 'styled-components'
 
-const Wrapper = ({
-  flexDir = 'row',
-  bgColor = theme.colors.dark,
-  children,
-}) => {
+const Wrapper = ({ flexDir = 'row', bgColor, children }) => {
+  const theme = useTheme()
   return (
-    <Div flexDir={flexDir} bgColor={bgColor}>
+    <Div flexDir={flexDir} bgColor={bgColor || theme.colors.dark}>
       {children}
     </Div>
   )
