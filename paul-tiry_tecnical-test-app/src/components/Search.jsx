@@ -5,9 +5,10 @@ import Results from './Results'
 import Wrapper from './Wrapper'
 
 const Search = forwardRef(({ data, onClick, error }, ref) => {
-  console.log('search Error: ', error)
-  console.log('search Data: ', data)
   const theme = useTheme()
+
+  if (error) {
+  }
   return (
     <>
       <Wrapper flexDir="column" bgColor={theme.colors.dark}>
@@ -29,13 +30,15 @@ const Title = styled.h1`
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.orange};
 `
-const Input = styled.input`
+const Input = styled.input.attrs(({ err }) => ({}))`
   min-width: 75%;
   padding-left: 0.5rem;
   height: 2rem;
   margin: 3rem 0;
   font-size: 1.2rem;
   border-radius: 0.4rem;
+  border: 1px solid ${({ theme }) => theme.colors.orange};
+  background-color: ${({ theme }) => theme.colors.lightGray};
 `
 const Form = styled.form`
   display: flex;
