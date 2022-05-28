@@ -8,32 +8,11 @@ import Search from './components/Search'
 import User from './components/user/User'
 
 function App() {
-  const input = useRef()
-  const { searchData, search } = useFetch()
-  const [searchValue, setSearchValue] = useState()
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    search(input.current.value)
-    setSearchValue(input.current.value)
-    input.current.value = ''
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Search
-              ref={input}
-              onClick={handleSubmit}
-              data={searchData}
-              searchValue={searchValue}
-            />
-          }
-        ></Route>
+        <Route path="/" element={<Search />}></Route>
         <Route path="/user/:login" element={<User />} />
       </Routes>
     </ThemeProvider>
