@@ -4,7 +4,9 @@ export const getUsers = async (value) => {
       error: { id: 422, message: 'Please enter a value' },
     }
   }
-  const response = await fetch(`https://api.github.com/search/users?q=${value}`)
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/search/users?q=${value}`
+  )
   const result = await response.json()
   if (result.total_count === 0) {
     return {
@@ -19,7 +21,9 @@ export const getUsers = async (value) => {
 }
 
 export const getInfo = async (login) => {
-  const response = await fetch(`https://api.github.com/users/${login}`)
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/users/${login}`
+  )
   const result = await response.json()
   return result
 }
