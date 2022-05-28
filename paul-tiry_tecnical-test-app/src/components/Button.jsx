@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-const Button = ({ onClick, text }) => {
-  return <CustomBtn onClick={onClick}>{text}</CustomBtn>
+const Button = ({ text, submit }) => {
+  return <CustomBtn type={submit}>{text}</CustomBtn>
 }
 
 export default Button

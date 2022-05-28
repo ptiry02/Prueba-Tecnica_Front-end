@@ -13,6 +13,7 @@ export default Wrapper
 
 const Div = styled.div`
   display: flex;
+  min-height: 185px;
   flex-direction: ${({ flexDir }) => flexDir};
   align-items: center;
   margin: 4rem 0;

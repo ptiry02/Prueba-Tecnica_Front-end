@@ -28,10 +28,24 @@ const Chart = ({ userName }) => {
       >
         <VictoryAxis domain={[1, 2]} style={{ tickLabels: { fontSize: 22 } }} />
         <VictoryAxis
-          dependentAxis={
-            (userData.followers && userData.following) === 0 ? false : true
-          }
-          style={{ tickLabels: { fontSize: 22 } }}
+          dependentAxis
+          style={{
+            tickLabels: {
+              fontSize: 22,
+              display:
+                userData.followers === 0 && userData.following === 0
+                  ? 'none'
+                  : 'block',
+            },
+            axis: {
+              display:
+                userData.followers === 0 && userData.following === 0
+                  ? 'none'
+                  : 'block',
+            },
+          }}
+          tickCount={3}
+          tickFormat={(t) => Math.round(t)}
         />
         <VictoryBar
           data={info}
