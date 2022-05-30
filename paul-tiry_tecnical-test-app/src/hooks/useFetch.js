@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { getUsers, getInfo } from '../apis/get'
+import { getUsers, getInfo } from '../apis/geters'
 
 const useFetch = () => {
   const [searchData, setSearchData] = useState({})

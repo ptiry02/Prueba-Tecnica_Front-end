@@ -4,7 +4,6 @@ import { FaGithubSquare } from 'react-icons/fa'
 import { BsPersonBadge, BsPersonPlusFill } from 'react-icons/bs'
 import Wrapper from '../Wrapper'
 import useFetch from '../../hooks/useFetch'
-import UserInfo from './UserInfo'
 
 const User = () => {
   const user = useParams()
